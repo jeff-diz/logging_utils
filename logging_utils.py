@@ -169,6 +169,7 @@ def create_logger(logger_name, handler_type,
 
 
 def project_path():
+    # TODO: This is hardcoded...
     if platform.system() == 'Windows':
         prj_path = r'C:\code\pgc-code-all'
     elif platform.system() == 'Linux':

@@ -6,12 +6,15 @@ Created on Fri Jan  3 10:50:59 2020
 Logging module helper functions
 """
 
-import datetime
+from datetime import datetime
 
 import logging
 import os
+from pathlib import Path
 import platform
 import sys
+
+from get_config import get_config
 
 
 class CustomError(Exception):
@@ -201,3 +204,13 @@ def create_module_loggers(handler_type, handler_level,
         loggers.append(logger)
     
     return loggers
+
+
+def create_logfile_path(name, logdir=None):
+    now = datetime.now().strftime('%Y%b%d_%H%m%S')
+    logname = '{}_{}.log'.format(name, now)
+    if not logdir:
+        logdir = get_config("logdir")
+    logfile = os.path.join(logdir, logname)
+
+    return logfile
